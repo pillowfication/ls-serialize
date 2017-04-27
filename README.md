@@ -1,6 +1,12 @@
-# ls-directory
+# ls-serialize
 
 Serialize a directory.
+
+## Install
+
+```
+npm install ls-serialize
+```
 
 ## Example
 
