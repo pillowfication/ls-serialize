@@ -1,4 +1,4 @@
-const ls = require('ls');
+const ls = require('./ls');
 const {File, Directory} = require('./structures');
 
 function serialize(root, options) {
