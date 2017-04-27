@@ -29,7 +29,3 @@ function serialize(root, options) {
 }
 
 module.exports = serialize;
-
-let ls = require('./ls');
-let p = require('path');
-module.exports = serialize(ls(p.join(__dirname, '..', 'test')), {levelInd: ' ', dirInd: '+', fileInd: '-'})
