@@ -16,7 +16,6 @@
     "url": "https://github.com/pillowfication/ls-serialize/issues"
   },
   "main": "index.js",
-  "dependencies": {},
   "devDependencies": {
     "eslint": "^3.18.0",
     "eslint-config-pf": "1.0.7"

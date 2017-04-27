@@ -1,13 +1,20 @@
 class File {
-  constructor(path, name) {
-    this.path = path;
+  constructor(name) {
     this.name = name;
+    this.parent = null;
   }
 }
 
-class Directory extends File {
-  constructor(path, name) {
-    super(path, name);
+class Directory extends Map {
+  constructor(name) {
+    super();
+    this.name = name;
+    this.parent = null;
+  }
+
+  addFile(file) {
+    file.parent = this;
+    this.set(file.name, file);
   }
 }
 
