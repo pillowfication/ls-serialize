@@ -1,20 +1,18 @@
 const {File, Directory} = require('./structures');
 
 // http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript/3561711#3561711
-function sanitize(val) {
+function escape(val) {
   return val.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
-function deserialize(dirString) {
-  const levelInd = ' ';
-  const dirInd = '+';
-  const fileInd = '-';
+function deserialize(dirString, options) {
+  const {levelInd, dirInd, fileInd} = options;
 
   const lines = dirString.split('\n');
   const rootTest = /^ROOT=(.+)$/;
   const test = new RegExp(
-    `^(${sanitize(levelInd)}*)` +
-    `(${sanitize(dirInd)}|${sanitize(fileInd)})` +
+    `^(${escape(levelInd)}*)` +
+    `(${escape(dirInd)}|${escape(fileInd)})` +
     '(.+)$'
   );
 
