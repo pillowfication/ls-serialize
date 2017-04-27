@@ -1,10 +1,11 @@
+const ls = require('ls');
 const {File, Directory} = require('./structures');
 
 function serialize(root, options) {
   const {levelInd, dirInd, fileInd} = options;
 
   if (!(root instanceof Directory)) {
-    throw new TypeError('Expected first parameter to be of type Directory');
+    root = ls(root);
   }
 
   let output = `ROOT=${root.name}\n`;
