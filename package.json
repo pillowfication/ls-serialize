@@ -1,0 +1,24 @@
+{
+  "name": "ls-serialize",
+  "version": "0.0.0",
+  "description": "Serialize a directory",
+  "author": {
+    "name": "Markus Tran",
+    "email": "thebluepillow@gmail.com",
+    "url": "http://pillowfication.com"
+  },
+  "homepage": "https://github.com/pillowfication/ls-serialize",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pillowfication/ls-serialize.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pillowfication/ls-serialize/issues"
+  },
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^3.18.0",
+    "eslint-config-pf": "1.0.7"
+  }
+}
