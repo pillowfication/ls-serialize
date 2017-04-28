@@ -3,6 +3,18 @@ class File {
     this.name = name;
     this.parent = null;
   }
+
+  get path() {
+    let pathname = this.name;
+    let currDir = this;
+
+    while (currDir.parent) {
+      currDir = currDir.parent;
+      pathname = `${currDir.name}/${pathname}`;
+    }
+
+    return pathname;
+  }
 }
 
 class Directory extends Map {
@@ -10,6 +22,18 @@ class Directory extends Map {
     super();
     this.name = name;
     this.parent = null;
+  }
+
+  get path() {
+    let pathname = this.name;
+    let currDir = this;
+
+    while (currDir.parent) {
+      currDir = currDir.parent;
+      pathname = `${currDir.name}/${pathname}`;
+    }
+
+    return pathname;
   }
 
   addFile(file) {
