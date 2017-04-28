@@ -15,6 +15,18 @@ class File {
 
     return pathname;
   }
+
+  get pathURIEncoded() {
+    let pathname = encodeURIComponent(this.name);
+    let currDir = this;
+
+    while (currDir.parent) {
+      currDir = currDir.parent;
+      pathname = `${encodeURIComponent(currDir.name)}/${pathname}`;
+    }
+
+    return pathname;
+  }
 }
 
 class Directory extends Map {
