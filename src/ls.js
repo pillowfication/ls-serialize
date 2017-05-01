@@ -3,7 +3,7 @@ const path = require('path');
 const {File, Directory} = require('./structures');
 
 function ls(dirPath) {
-  const root = new Directory(path.basename(dirPath));
+  const root = new Directory(path.basename(dirPath), true);
 
   function _ls(dir, dirPath) {
     for (const fileName of fs.readdirSync(dirPath)) {
