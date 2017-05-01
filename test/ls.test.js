@@ -30,6 +30,7 @@ function dirDeepEquals(dirA, dirB) {
 
   else if (dirA instanceof Directory) {
     expect(dirB).to.be.instanceof(Directory, dirA.path);
+    expect(dirA.name).to.equal(dirB.name);
     expect(dirA.path).to.equal(dirB.path);
     for (const fileName of dirA.fileNames) {
       dirDeepEquals(dirA.get(fileName), dirB.get(fileName));

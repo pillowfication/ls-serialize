@@ -21,7 +21,7 @@ function deserialize(dirString, options) {
     throw new SyntaxError('First line must be `ROOT=[name]`');
   }
 
-  const root = new Directory(rootMatch[1]);
+  const root = new Directory(rootMatch[1], true);
   let currDir = root;
   let currLevel = 0;
 
