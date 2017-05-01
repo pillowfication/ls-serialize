@@ -13,7 +13,7 @@ function serialize(root, options) {
   function _serialize(file, level) {
     if (file instanceof Directory) {
       output += levelInd.repeat(level) + dirInd + file.name + '\n';
-      for (const [, subFile] of file) {
+      for (const subFile of file) {
         _serialize(subFile, level + 1);
       }
     }
@@ -23,7 +23,7 @@ function serialize(root, options) {
     }
   }
 
-  for (const [, subFile] of root) {
+  for (const subFile of root) {
     _serialize(subFile, 0);
   }
   return output;

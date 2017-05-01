@@ -1,56 +1,91 @@
+const path = require('path');
+
 class File {
-  constructor(name) {
-    this.name = name;
+  constructor(base) {
+    const parsed = path.parse(base);
     this.parent = null;
+    this.base = parsed.base;
+    this.ext = parsed.ext;
+    this.name = parsed.name;
   }
 
   get path() {
-    let pathname = this.name;
-    let currDir = this;
-
-    while (currDir.parent) {
-      currDir = currDir.parent;
-      pathname = `${currDir.name}/${pathname}`;
-    }
-
-    return pathname;
+    return this.parent ? path.join(this.parent.path, this.base) : this.base;
   }
-
-  get pathURIEncoded() {
-    let pathname = encodeURIComponent(this.name);
-    let currDir = this;
-
-    while (currDir.parent) {
-      currDir = currDir.parent;
-      pathname = `${encodeURIComponent(currDir.name)}/${pathname}`;
-    }
-
-    return pathname;
+  get root() {
+    return this.parent ? this.parent.root : '';
+  }
+  get dir() {
+    return this.parent ? this.parent.path : '';
   }
 }
 
-class Directory extends Map {
-  constructor(name) {
-    super();
-    this.name = name;
-    this.parent = null;
+class Directory {
+  constructor(base, _isRoot) {
+    this._map = new Map();
+    this._isRoot = _isRoot;
+    const parsed = path.parse(base);
+    this.base = parsed.base;
+    this.ext = parsed.ext;
+    this.name = parsed.name;
   }
 
   get path() {
-    let pathname = this.name;
-    let currDir = this;
+    return this.parent
+      ? path.join(this.parent.path, this.base)
+      : this._isRoot ? path.sep : this.base;
+  }
+  get root() {
+    return this._isRoot ? path.sep : '';
+  }
+  get dir() {
+    return this.parent ? this.parent.path : '';
+  }
 
-    while (currDir.parent) {
-      currDir = currDir.parent;
-      pathname = `${currDir.name}/${pathname}`;
-    }
-
-    return pathname;
+  get files() {
+    return this._map.values();
+  }
+  get fileNames() {
+    return this._map.keys();
   }
 
   addFile(file) {
+    if (!(file instanceof File) && !(file instanceof Directory)) {
+      throw new TypeError('File added must be of type File or Directory');
+    }
+    if (this.has(file.base)) {
+      throw new TypeError(`File \`${file.base}\` already exists`);
+    }
+    this._map.set(file.base, file);
     file.parent = this;
-    this.set(file.name, file);
+    return this;
+  }
+
+  clear() {
+    this.forEach(file => {
+      file.parent = null;
+    });
+    return this._map.clear();
+  }
+  delete(fileName) {
+    let file = this.get(fileName);
+    if (file) {
+      file.parent = null;
+    }
+    return this._map.delete(fileName);
+  }
+  forEach(cb) {
+    return this._map.forEach(([, file]) => cb(file));
+  }
+  get(fileName) {
+    return this._map.get(fileName);
+  }
+  has(fileName) {
+    return this._map.has(fileName);
+  }
+
+  [Symbol.iterator]() {
+    return this.files[Symbol.iterator]();
   }
 }
 
