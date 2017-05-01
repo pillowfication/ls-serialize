@@ -16,8 +16,12 @@
     "url": "https://github.com/pillowfication/ls-serialize/issues"
   },
   "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha"
+  },
   "devDependencies": {
     "eslint": "^3.18.0",
-    "eslint-config-pf": "1.0.7"
+    "eslint-config-pf": "1.0.7",
+    "mocha": "^3.3.0"
   }
 }

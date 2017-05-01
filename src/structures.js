@@ -21,10 +21,11 @@ class File {
 }
 
 class Directory {
-  constructor(base, _isRoot) {
+  constructor(base, isRoot) {
     this._map = new Map();
-    this._isRoot = _isRoot;
+    this.isRoot = isRoot;
     const parsed = path.parse(base);
+    this.parent = null;
     this.base = parsed.base;
     this.ext = parsed.ext;
     this.name = parsed.name;
@@ -33,10 +34,12 @@ class Directory {
   get path() {
     return this.parent
       ? path.join(this.parent.path, this.base)
-      : this._isRoot ? path.sep : this.base;
+      : this.isRoot ? path.sep : this.base;
   }
   get root() {
-    return this._isRoot ? path.sep : '';
+    return this.parent
+      ? this.parent.root
+      : this.isRoot ? path.sep : '';
   }
   get dir() {
     return this.parent ? this.parent.path : '';
@@ -61,27 +64,44 @@ class Directory {
     return this;
   }
 
-  clear() {
-    this.forEach(file => {
-      file.parent = null;
-    });
-    return this._map.clear();
-  }
-  delete(fileName) {
-    let file = this.get(fileName);
-    if (file) {
-      file.parent = null;
+  removeFile(file) {
+    if (!(file instanceof File) && !(file instanceof Directory)) {
+      file = this.get(file);
     }
+    let fileName = file && file.base;
+
+    if (!fileName || !this.has(fileName) || file !== this.get(fileName)) {
+      throw new TypeError(`File \`${fileName}\` not found`);
+    }
+
+    file.parent = null;
     return this._map.delete(fileName);
   }
-  forEach(cb) {
-    return this._map.forEach(([, file]) => cb(file));
+
+  clear() {
+    for (const file of this) {
+      file.parent = null;
+    }
+    return this._map.clear();
   }
+
   get(fileName) {
     return this._map.get(fileName);
   }
-  has(fileName) {
-    return this._map.has(fileName);
+
+  has(file) {
+    if (!(file instanceof File) && !(file instanceof Directory)) {
+      file = this.get(file);
+    }
+    let fileName = file && file.base;
+
+    return file ? this.get(fileName) === file : false;
+  }
+
+  forEach(cb) {
+    for (const file of this) {
+      cb(file);
+    }
   }
 
   [Symbol.iterator]() {
