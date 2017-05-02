@@ -8,18 +8,18 @@ function serialize(root, options) {
     root = ls(root);
   }
 
-  let output = `ROOT=${root.name}\n`;
+  let output = `ROOT=${root.base}\n`;
 
   function _serialize(file, level) {
     if (file instanceof Directory) {
-      output += levelInd.repeat(level) + dirInd + file.name + '\n';
+      output += levelInd.repeat(level) + dirInd + file.base + '\n';
       for (const subFile of file) {
         _serialize(subFile, level + 1);
       }
     }
 
     else if (file instanceof File) {
-      output += levelInd.repeat(level) + fileInd + file.name + '\n';
+      output += levelInd.repeat(level) + fileInd + file.base + '\n';
     }
   }
 
