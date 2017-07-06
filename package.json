@@ -1,6 +1,6 @@
 {
   "name": "ls-serialize",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Serialize a directory",
   "author": {
     "name": "Markus Tran",
