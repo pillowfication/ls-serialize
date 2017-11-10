@@ -11,9 +11,9 @@ npm install ls-serialize
 ## Example
 
 ```javascript
-const ls = require('ls-serialize');
+const ls = require('ls-serialize')
 
-const dirString = ls.serialize(path.join(__dirname, 'test'));
+const dirString = ls.serialize(path.join(__dirname, 'test'))
 // ROOT=test
 // +level1
 //  -file_1_a
@@ -28,7 +28,7 @@ const dirString = ls.serialize(path.join(__dirname, 'test'));
 //   +level3
 //    -file_3_a
 
-const dir = ls.deserialize(dirString);
+const dir = ls.deserialize(dirString)
 // Directory { name: 'test',
 //   'level1' => Directory { name: 'level1',
 //     'file_1_a' => File { name: 'file_1_a' },
