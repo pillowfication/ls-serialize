@@ -1,8 +1,8 @@
 const { File, Directory } = require('./structures')
 
 // http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript/3561711#3561711
-function escape (val) {
-  return val.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
+function escape (value) {
+  return value.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
 }
 
 module.exports = function deserialize (dirString, options) {

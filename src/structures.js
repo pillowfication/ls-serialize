@@ -99,9 +99,9 @@ class Directory {
     return file ? this.get(fileName) === file : false
   }
 
-  forEach (cb) {
+  forEach (callback) {
     for (const file of this) {
-      cb(file)
+      callback(file)
     }
   }
 

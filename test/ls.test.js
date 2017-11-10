@@ -1,5 +1,4 @@
 /* global describe it */
-/* eslint-disable no-unused-expressions */
 
 const path = require('path')
 const { expect } = require('chai')
