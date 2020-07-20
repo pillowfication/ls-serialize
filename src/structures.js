@@ -2,6 +2,7 @@ const path = require('path')
 
 class File {
   constructor (base) {
+    this.isFile = true
     const parsed = path.parse(base)
     this.parent = null
     this.base = parsed.base
@@ -24,6 +25,7 @@ class File {
 
 class Directory {
   constructor (base, isRoot) {
+    this.isDirectory = true
     this._map = new Map()
     this.isRoot = isRoot
     const parsed = path.parse(base)
