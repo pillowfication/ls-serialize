@@ -12,9 +12,11 @@ class File {
   get path () {
     return this.parent ? path.join(this.parent.path, this.base) : this.base
   }
+
   get root () {
     return this.parent ? this.parent.root : ''
   }
+
   get dir () {
     return this.parent ? this.parent.path : ''
   }
@@ -36,11 +38,13 @@ class Directory {
       ? path.join(this.parent.path, this.base)
       : this.isRoot ? path.sep : this.base
   }
+
   get root () {
     return this.parent
       ? this.parent.root
       : this.isRoot ? path.sep : ''
   }
+
   get dir () {
     return this.parent ? this.parent.path : ''
   }
@@ -48,6 +52,7 @@ class Directory {
   get files () {
     return this._map.values()
   }
+
   get fileNames () {
     return this._map.keys()
   }
@@ -68,7 +73,7 @@ class Directory {
     if (!(file instanceof File) && !(file instanceof Directory)) {
       file = this.get(file)
     }
-    let fileName = file && file.base
+    const fileName = file && file.base
 
     if (!fileName || !this.has(fileName) || file !== this.get(fileName)) {
       throw new TypeError(`File \`${fileName}\` not found`)
@@ -94,7 +99,7 @@ class Directory {
     if (!(file instanceof File) && !(file instanceof Directory)) {
       file = this.get(file)
     }
-    let fileName = file && file.base
+    const fileName = file && file.base
 
     return file ? this.get(fileName) === file : false
   }

@@ -106,7 +106,7 @@ describe('Directory', () => {
       expect(() => dir.addFile(new Directory('directory'))).to.not.throw()
 
       expect(() => dir.addFile('foobar')).to.throw()
-      expect(() => dir.addFile({foo: 'bar'})).to.throw()
+      expect(() => dir.addFile({ foo: 'bar' })).to.throw()
     })
 
     it('sets the `parent` of added file to itself', () => {

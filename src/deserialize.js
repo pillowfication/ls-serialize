@@ -5,7 +5,7 @@ function escape (value) {
   return value.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
 }
 
-module.exports = function deserialize (dirString, options) {
+function deserialize (dirString, options) {
   const { levelInd, dirInd, fileInd } = options
 
   const lines = dirString.split('\n')
@@ -57,3 +57,5 @@ module.exports = function deserialize (dirString, options) {
 
   return root
 }
+
+module.exports = deserialize

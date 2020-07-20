@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const { File, Directory } = require('./structures')
 
-module.exports = function ls (dirPath) {
+function ls (dirPath) {
   const root = new Directory(path.basename(dirPath), true)
 
   function _ls (dir, dirPath) {
@@ -24,3 +24,5 @@ module.exports = function ls (dirPath) {
   _ls(root, dirPath)
   return root
 }
+
+module.exports = ls

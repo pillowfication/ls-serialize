@@ -1,7 +1,7 @@
 const ls = require('./ls')
 const { File, Directory } = require('./structures')
 
-module.exports = function serialize (root, options) {
+function serialize (root, options) {
   const { levelInd, dirInd, fileInd } = options
 
   if (!(root instanceof Directory)) {
@@ -26,3 +26,5 @@ module.exports = function serialize (root, options) {
   }
   return output
 }
+
+module.exports = serialize
